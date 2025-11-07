@@ -1,5 +1,9 @@
 # Burger API (PT) — CRUD de Adicionais com Swagger
 
+## Objetivos 
+- Swagger configurado e rico em informações (sumário, descrições, exemplos via anotações);
+- Evitar complexidade de banco: **EF Core InMemory**.
+
 ## Requisitos
 - .NET 8 SDK instalado (`dotnet --version`);
 - (Opcional) Visual Studio Code.
@@ -28,6 +32,7 @@ Abra o navegador em: **https://localhost:5001/swagger** (ou **http://localhost:5
   "ativo": true
 }
 ```
+
 ## Organização do código
 - `Program.cs` — configuração geral, Swagger e seed de dados.
 - `Data/AppDbContext.cs` — EF Core InMemory.
