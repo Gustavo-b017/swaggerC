@@ -1,15 +1,21 @@
 [
   {
-    "ContainingType": "BurgerApi.Controllers.BurgersController",
-    "Method": "GetAll",
-    "RelativePath": "api/Burgers",
+    "ContainingType": "BurgerApiPT.Controllers.AdicionaisController",
+    "Method": "Get",
+    "RelativePath": "api/Adicionais",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "somenteAtivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[BurgerApi.DTOs.BurgerDto, BurgerApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[BurgerApiPT.Models.Adicional, BurgerApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "application/json"
         ],
@@ -18,22 +24,22 @@
     ]
   },
   {
-    "ContainingType": "BurgerApi.Controllers.BurgersController",
-    "Method": "Create",
-    "RelativePath": "api/Burgers",
+    "ContainingType": "BurgerApiPT.Controllers.AdicionaisController",
+    "Method": "Post",
+    "RelativePath": "api/Adicionais",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "BurgerApi.DTOs.CreateBurgerDto",
+        "Type": "BurgerApiPT.Models.Adicional",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "BurgerApi.DTOs.BurgerDto",
+        "Type": "BurgerApiPT.Models.Adicional",
         "MediaTypes": [
           "application/json"
         ],
@@ -49,9 +55,9 @@
     ]
   },
   {
-    "ContainingType": "BurgerApi.Controllers.BurgersController",
+    "ContainingType": "BurgerApiPT.Controllers.AdicionaisController",
     "Method": "GetById",
-    "RelativePath": "api/Burgers/{id}",
+    "RelativePath": "api/Adicionais/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -64,7 +70,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "BurgerApi.DTOs.BurgerDto",
+        "Type": "BurgerApiPT.Models.Adicional",
         "MediaTypes": [
           "application/json"
         ],
@@ -80,9 +86,9 @@
     ]
   },
   {
-    "ContainingType": "BurgerApi.Controllers.BurgersController",
-    "Method": "Update",
-    "RelativePath": "api/Burgers/{id}",
+    "ContainingType": "BurgerApiPT.Controllers.AdicionaisController",
+    "Method": "Put",
+    "RelativePath": "api/Adicionais/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -94,7 +100,7 @@
       },
       {
         "Name": "dto",
-        "Type": "BurgerApi.DTOs.UpdateBurgerDto",
+        "Type": "BurgerApiPT.Models.Adicional",
         "IsRequired": true
       }
     ],
@@ -103,152 +109,6 @@
         "Type": "System.Void",
         "MediaTypes": [],
         "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "BurgerApi.Controllers.BurgersController",
-    "Method": "Delete",
-    "RelativePath": "api/Burgers/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "BurgerApi.Controllers.BurgersController",
-    "Method": "AddTopping",
-    "RelativePath": "api/Burgers/{id}/toppings/{toppingId}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "toppingId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "BurgerApi.Controllers.BurgersController",
-    "Method": "RemoveTopping",
-    "RelativePath": "api/Burgers/{id}/toppings/{toppingId}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "toppingId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "BurgerApi.Controllers.ToppingsController",
-    "Method": "GetAll",
-    "RelativePath": "api/Toppings",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[BurgerApi.DTOs.ToppingDto, BurgerApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BurgerApi.Controllers.ToppingsController",
-    "Method": "Create",
-    "RelativePath": "api/Toppings",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "BurgerApi.DTOs.CreateToppingDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BurgerApi.DTOs.ToppingDto",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 201
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -256,30 +116,6 @@
           "application/json"
         ],
         "StatusCode": 400
-      }
-    ]
-  },
-  {
-    "ContainingType": "BurgerApi.Controllers.ToppingsController",
-    "Method": "GetById",
-    "RelativePath": "api/Toppings/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BurgerApi.DTOs.ToppingDto",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
@@ -291,43 +127,9 @@
     ]
   },
   {
-    "ContainingType": "BurgerApi.Controllers.ToppingsController",
-    "Method": "Update",
-    "RelativePath": "api/Toppings/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "BurgerApi.DTOs.UpdateToppingDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
-  },
-  {
-    "ContainingType": "BurgerApi.Controllers.ToppingsController",
+    "ContainingType": "BurgerApiPT.Controllers.AdicionaisController",
     "Method": "Delete",
-    "RelativePath": "api/Toppings/{id}",
+    "RelativePath": "api/Adicionais/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,

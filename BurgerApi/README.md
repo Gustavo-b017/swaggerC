@@ -1,25 +1,58 @@
-# Burger API (Swagger-Driven � .NET 8 � MySQL)
+# Burger API (PT) — CRUD de Adicionais com Swagger
 
-API did�tica para montar hamb�rguer (CRUD + relacionamento N:N), com foco em **documenta��o no Swagger**.
+API didática, mínima e **100% em português** para CRUD de *Adicionais* (antes chamados de **Toppings**), com foco na documentação **Swagger**.
 
-## Stack
-- ASP.NET Core Web API (.NET 8)
-- EF Core 9 + Pomelo MySQL
-- AutoMapper
-- Swashbuckle (Swagger + Annotations)
-- CORS pronto para `http://localhost:5173` e `http://localhost:3000`
+## Objetivos do redesign
+- Renomear completamente o conceito **Topping → Adicional** (classe, rotas, comentários e Swagger);
+- Código **simples**, **enxuto** e **bem comentado**, próprio para quem está começando em C#;
+- Swagger configurado e rico em informações (sumário, descrições, exemplos via anotações);
+- Evitar complexidade de banco: **EF Core InMemory** (sem migrações).
 
 ## Requisitos
-- .NET SDK 8+
-- MySQL (XAMPP) rodando em `localhost:3306`
+- .NET 8 SDK instalado (`dotnet --version`);
+- (Opcional) Visual Studio Code + extensões C#.
 
-## Configura��o
+## Como executar
+```bash
+dotnet restore
+dotnet run
+```
 
-**appsettings.json**
+Abra o navegador em: **https://localhost:5001/swagger** (ou **http://localhost:5000/swagger**).
+
+## Endpoints principais
+- `GET /api/adicionais` — lista; `?somenteAtivos=true` filtra só os ativos
+- `GET /api/adicionais/{id}` — detalhe
+- `POST /api/adicionais` — cria
+- `PUT /api/adicionais/{id}` — atualiza
+- `DELETE /api/adicionais/{id}` — exclui
+
+### Exemplo de corpo (POST/PUT)
 ```json
 {
-  "ConnectionStrings": {
-    "BurgerDb": "Server=localhost;Port=3306;Database=burgerdb;User Id=root;Password=;CharSet=utf8mb4;TreatTinyAsBoolean=true;"
-  },
-  "AllowedHosts": "*"
+  "id": 0,
+  "nome": "Queijo Cheddar",
+  "preco": 3.5,
+  "ativo": true
 }
+```
+
+## Mapeamento de renomeação (seu projeto antigo)
+| Antes (EN) | Agora (PT)  |
+|------------|-------------|
+| Topping    | Adicional   |
+| ToppingId  | Id          |
+| Name       | Nome        |
+| Price      | Preco       |
+| IsAvailable| Ativo       |
+
+> Se você já tinha **MySQL/XAMPP**, pode manter esta API em memória só para a documentação e depois trocar `UseInMemoryDatabase` por `UseMySql` ou `UseSqlServer`. O código dos controllers muda pouco.
+
+## Organização do código
+- `Program.cs` — configuração geral, Swagger e seed de dados.
+- `Data/AppDbContext.cs` — EF Core InMemory.
+- `Models/Adicional.cs` — entidade com validações.
+- `Controllers/AdicionaisController.cs` — CRUD completo com anotações Swagger.
+
+## Licença
+MIT

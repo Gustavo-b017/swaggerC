@@ -1,17 +1,26 @@
 {
-  "openapi": "3.0.4",
+  "openapi": "3.0.1",
   "info": {
-    "title": "Burger API",
-    "description": "API didática para montar hambúrguer, com foco em documentação Swagger (CRUD + N:N).",
+    "title": "Burger API (PT) — Adicionais",
+    "description": "API didática em .NET 8 para CRUD de Adicionais (itens extras do hambúrguer).",
     "version": "v1"
   },
   "paths": {
-    "/api/Burgers": {
+    "/api/Adicionais": {
       "get": {
         "tags": [
-          "Burgers"
+          "Adicionais"
         ],
-        "summary": "Lista todos os burgers (com toppings e preço calculado).",
+        "parameters": [
+          {
+            "name": "somenteAtivos",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -20,7 +29,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/BurgerDto"
+                    "$ref": "#/components/schemas/Adicional"
                   }
                 }
               }
@@ -30,25 +39,23 @@
       },
       "post": {
         "tags": [
-          "Burgers"
+          "Adicionais"
         ],
-        "summary": "Cria um novo burger (pode incluir toppings iniciais).",
-        "description": "Exemplo:\r\n\r\n```json\r\n{ \"name\": \"Duplo\", \"basePrice\": 15.00, \"toppingIds\": [1,2] }\r\n```",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateBurgerDto"
+                "$ref": "#/components/schemas/Adicional"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateBurgerDto"
+                "$ref": "#/components/schemas/Adicional"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateBurgerDto"
+                "$ref": "#/components/schemas/Adicional"
               }
             }
           }
@@ -59,7 +66,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BurgerDto"
+                  "$ref": "#/components/schemas/Adicional"
                 }
               }
             }
@@ -77,12 +84,11 @@
         }
       }
     },
-    "/api/Burgers/{id}": {
+    "/api/Adicionais/{id}": {
       "get": {
         "tags": [
-          "Burgers"
+          "Adicionais"
         ],
-        "summary": "Obtém um burger por id.",
         "parameters": [
           {
             "name": "id",
@@ -100,7 +106,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BurgerDto"
+                  "$ref": "#/components/schemas/Adicional"
                 }
               }
             }
@@ -119,9 +125,8 @@
       },
       "put": {
         "tags": [
-          "Burgers"
+          "Adicionais"
         ],
-        "summary": "Atualiza nome e preço base.",
         "parameters": [
           {
             "name": "id",
@@ -137,17 +142,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateBurgerDto"
+                "$ref": "#/components/schemas/Adicional"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateBurgerDto"
+                "$ref": "#/components/schemas/Adicional"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateBurgerDto"
+                "$ref": "#/components/schemas/Adicional"
               }
             }
           }
@@ -155,194 +160,6 @@
         "responses": {
           "204": {
             "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Burgers"
-        ],
-        "summary": "Exclui um burger.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Burgers/{id}/toppings/{toppingId}": {
-      "post": {
-        "tags": [
-          "Burgers"
-        ],
-        "summary": "Adiciona um topping ao burger.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "toppingId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Burgers"
-        ],
-        "summary": "Remove um topping do burger.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "toppingId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Toppings": {
-      "get": {
-        "tags": [
-          "Toppings"
-        ],
-        "summary": "Lista todos os toppings.",
-        "description": "Retorna a lista de todos os toppings.",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ToppingDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Toppings"
-        ],
-        "summary": "Cria um novo topping.",
-        "description": "Exemplo de body:\r\n\r\n```json\r\n{ \"name\": \"Tomate\", \"price\": 1.20 }\r\n```",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateToppingDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateToppingDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateToppingDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ToppingDto"
-                }
-              }
-            }
           },
           "400": {
             "description": "Bad Request",
@@ -353,88 +170,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/Toppings/{id}": {
-      "get": {
-        "tags": [
-          "Toppings"
-        ],
-        "summary": "Obtém um topping por id.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ToppingDto"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Toppings"
-        ],
-        "summary": "Atualiza um topping existente.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateToppingDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateToppingDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateToppingDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "No Content"
           },
           "404": {
             "description": "Not Found",
@@ -450,9 +185,8 @@
       },
       "delete": {
         "tags": [
-          "Toppings"
+          "Adicionais"
         ],
-        "summary": "Exclui um topping.",
         "parameters": [
           {
             "name": "id",
@@ -484,80 +218,29 @@
   },
   "components": {
     "schemas": {
-      "BurgerDto": {
+      "Adicional": {
+        "required": [
+          "nome"
+        ],
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
           },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "basePrice": {
-            "type": "number",
-            "format": "double"
-          },
-          "calculatedPrice": {
-            "type": "number",
-            "format": "double"
-          },
-          "toppings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ToppingDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "DTO de leitura (inclui preço calculado e lista de toppings)."
-      },
-      "CreateBurgerDto": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "minLength": 1,
+          "nome": {
+            "maxLength": 60,
+            "minLength": 2,
             "type": "string"
           },
-          "basePrice": {
-            "maximum": 9999,
+          "preco": {
+            "maximum": 100,
             "minimum": 0,
             "type": "number",
             "format": "double"
           },
-          "toppingIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Opcional: toppings iniciais.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "DTO para criação de Burger."
-      },
-      "CreateToppingDto": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "price": {
-            "maximum": 9999,
-            "minimum": 0,
-            "type": "number",
-            "format": "double"
+          "ativo": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -588,74 +271,7 @@
           }
         },
         "additionalProperties": { }
-      },
-      "ToppingDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateBurgerDto": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "basePrice": {
-            "maximum": 9999,
-            "minimum": 0,
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false,
-        "description": "DTO para atualização de Burger."
-      },
-      "UpdateToppingDto": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "price": {
-            "maximum": 9999,
-            "minimum": 0,
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
       }
     }
-  },
-  "tags": [
-    {
-      "name": "Burgers",
-      "description": "CRUD de Burgers e endpoints para montar/desmontar toppings."
-    },
-    {
-      "name": "Toppings",
-      "description": "Operações de CRUD para Toppings (ingredientes)."
-    }
-  ]
+  }
 }

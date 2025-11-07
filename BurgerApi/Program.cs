@@ -1,109 +1,47 @@
-using System.Reflection;
-using BurgerApi.Data;
-using BurgerApi.Mappings;
-using BurgerApi.Services.Implementations;
-using BurgerApi.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using BurgerApiPT.Data;
+using BurgerApiPT.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ===== ConnString: Railway -> fallback appsettings =====
-string? host = Environment.GetEnvironmentVariable("MYSQLHOST") ?? Environment.GetEnvironmentVariable("MYSQL_HOST");
-string? port = Environment.GetEnvironmentVariable("MYSQLPORT") ?? Environment.GetEnvironmentVariable("MYSQL_PORT");
-string? db   = Environment.GetEnvironmentVariable("MYSQLDATABASE") ?? Environment.GetEnvironmentVariable("MYSQL_DATABASE");
-string? user = Environment.GetEnvironmentVariable("MYSQLUSER") ?? Environment.GetEnvironmentVariable("MYSQL_USER");
-string? pass = Environment.GetEnvironmentVariable("MYSQLPASSWORD") 
-               ?? Environment.GetEnvironmentVariable("MYSQL_PASSWORD") 
-               ?? Environment.GetEnvironmentVariable("MYSQL_ROOT_PASSWORD");
-
-string connStr;
-if (!string.IsNullOrWhiteSpace(host) && !string.IsNullOrWhiteSpace(db) && !string.IsNullOrWhiteSpace(user))
-{
-    port ??= "3306";
-    pass ??= "";
-    connStr = $"Server={host};Port={port};Database={db};User ID={user};Password={pass};" +
-              "AllowPublicKeyRetrieval=True;SslMode=Preferred;TreatTinyAsBoolean=false;";
-}
-else
-{
-    // Dev local
-    connStr = builder.Configuration.GetConnectionString("BurgerDb")!;
-}
-
-// ===== DI =====
-builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseMySql(connStr, ServerVersion.AutoDetect(connStr), my =>
-        my.EnableRetryOnFailure(10, TimeSpan.FromSeconds(2), null)));
-
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-builder.Services.AddScoped<IBurgerService, BurgerService>();
-builder.Services.AddScoped<IToppingService, ToppingService>();
-
-builder.Services.AddControllers().AddJsonOptions(_ => { });
-
+// Serviços essenciais
+builder.Services.AddControllers();
+builder.Services.AddDbContext<AppDbContext>(o => o.UseInMemoryDatabase("BurgerDb"));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(o =>
 {
-    c.EnableAnnotations();
-    c.SwaggerDoc("v1", new OpenApiInfo
+    o.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Burger API",
+        Title = "Burger API (PT) — Adicionais",
         Version = "v1",
-        Description = "API didática para montar hambúrguer, com foco em documentação Swagger (CRUD + N:N)."
+        Description = "API didática em .NET 8 para CRUD de Adicionais (itens extras do hambúrguer)."
     });
-
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    if (File.Exists(xmlPath)) c.IncludeXmlComments(xmlPath);
-});
-
-// ===== CORS (sem barra final!) =====
-const string CorsPolicy = "AllowFront";
-builder.Services.AddCors(opt =>
-{
-    opt.AddPolicy(CorsPolicy, p => p
-        .WithOrigins(
-            "http://localhost:5173",
-            "http://127.0.0.1:5173",
-            "http://127.0.0.1:5500",
-            "https://hamburgueria-ten-kappa.vercel.app",
-            "https://swaggerc-production.up.railway.app"
-        )
-        .AllowAnyHeader()
-        .AllowAnyMethod());
 });
 
 var app = builder.Build();
 
-// ===== Swagger sempre ligado =====
+// Swagger sempre habilitado (para estudo)
 app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Burger API v1");
-    c.DisplayRequestDuration();
-    c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
-});
+app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
-app.UseCors(CorsPolicy);
 app.MapControllers();
 
-// Health simples na raiz (ajuda o Railway e o front)
-app.MapGet("/", () => Results.Ok(new { ok = true, service = "BurgerApi", time = DateTime.UtcNow }));
-
-// ===== Migração com try/catch (não derruba o app) =====
-using (var scope = app.Services.CreateScope())
-{
-    try
-    {
-        var dbCtx = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        dbCtx.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        app.Logger.LogError(ex, "[Startup] Falha ao aplicar migrações.");
-    }
-}
-
+Seed(app);
 app.Run();
+
+// ---- Seed simples de dados (para demonstração) ----
+static void Seed(WebApplication app)
+{
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    if (db.Adicionais.Any()) return;
+
+    db.Adicionais.AddRange(
+        new Adicional { Nome = "Queijo Cheddar", Preco = 3.50m, Ativo = true },
+        new Adicional { Nome = "Bacon", Preco = 4.00m, Ativo = true },
+        new Adicional { Nome = "Cebola Crispy", Preco = 2.50m, Ativo = true },
+        new Adicional { Nome = "Picles", Preco = 1.50m, Ativo = false }
+    );
+    db.SaveChanges();
+}
