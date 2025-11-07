@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\BurgerApi",
+    "\\BurgerApi\\Controllers",
+    "\\BurgerApi\\Data",
+    "\\BurgerApi\\Domain",
+    "\\BurgerApi\\DTOs",
+    "\\BurgerApi\\Mappings",
+    "\\BurgerApi\\Services",
+    "\\BurgerApi\\Services\\Implementations",
+    "\\BurgerApi\\Utils"
+  ],
+  "SelectedNode": "\\BurgerApi\\BurgerApi.csproj",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B00DD568-464C-CFDA-2FBD-558FF16000B6}|BurgerApi.csproj|c:\\users\\gustavo\\documents\\repositorios\\gustavo-b017\\swaggerc\\burgerapi\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{B00DD568-464C-CFDA-2FBD-558FF16000B6}|BurgerApi.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B00DD568-464C-CFDA-2FBD-558FF16000B6}|BurgerApi.csproj|c:\\users\\gustavo\\documents\\repositorios\\gustavo-b017\\swaggerc\\burgerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B00DD568-464C-CFDA-2FBD-558FF16000B6}|BurgerApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B00DD568-464C-CFDA-2FBD-558FF16000B6}|BurgerApi.csproj|c:\\users\\gustavo\\documents\\repositorios\\gustavo-b017\\swaggerc\\burgerapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B00DD568-464C-CFDA-2FBD-558FF16000B6}|BurgerApi.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B00DD568-464C-CFDA-2FBD-558FF16000B6}|BurgerApi.csproj|c:\\users\\gustavo\\documents\\repositorios\\gustavo-b017\\swaggerc\\burgerapi\\burgerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B00DD568-464C-CFDA-2FBD-558FF16000B6}|BurgerApi.csproj|solutionrelative:burgerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-11-06T23:03:35.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T22:40:54.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-06T22:40:13.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BurgerApi",
+              "DocumentMoniker": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\BurgerApi.csproj",
+              "RelativeDocumentMoniker": "BurgerApi.csproj",
+              "ToolTip": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\BurgerApi.csproj",
+              "RelativeToolTip": "BurgerApi.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-06T22:21:47.955Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

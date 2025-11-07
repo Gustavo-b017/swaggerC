@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BurgerApi</name>
+    </assembly>
+    <members>
+        <member name="M:BurgerApi.Controllers.BurgersController.GetAll">
+            <summary>Lista todos os burgers (com toppings e preço calculado).</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.BurgersController.GetById(System.Int32)">
+            <summary>Obtém um burger por id.</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.BurgersController.Create(BurgerApi.DTOs.CreateBurgerDto)">
+            <summary>Cria um novo burger (pode incluir toppings iniciais).</summary>
+            <remarks>
+            Exemplo:
+            
+            ```json
+            { "name": "Duplo", "basePrice": 15.00, "toppingIds": [1,2] }
+            ```
+            </remarks>
+        </member>
+        <member name="M:BurgerApi.Controllers.BurgersController.Update(System.Int32,BurgerApi.DTOs.UpdateBurgerDto)">
+            <summary>Atualiza nome e preço base.</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.BurgersController.Delete(System.Int32)">
+            <summary>Exclui um burger.</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.BurgersController.AddTopping(System.Int32,System.Int32)">
+            <summary>Adiciona um topping ao burger.</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.BurgersController.RemoveTopping(System.Int32,System.Int32)">
+            <summary>Remove um topping do burger.</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.ToppingsController.GetAll">
+            <summary>Lista todos os toppings.</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.ToppingsController.GetById(System.Int32)">
+            <summary>Obtém um topping por id.</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.ToppingsController.Create(BurgerApi.DTOs.CreateToppingDto)">
+            <summary>Cria um novo topping.</summary>
+            <remarks>
+            Exemplo de body:
+            
+            ```json
+            { "name": "Tomate", "price": 1.20 }
+            ```
+            </remarks>
+        </member>
+        <member name="M:BurgerApi.Controllers.ToppingsController.Update(System.Int32,BurgerApi.DTOs.UpdateToppingDto)">
+            <summary>Atualiza um topping existente.</summary>
+        </member>
+        <member name="M:BurgerApi.Controllers.ToppingsController.Delete(System.Int32)">
+            <summary>Exclui um topping.</summary>
+        </member>
+        <member name="T:BurgerApi.Data.AppDbContext">
+            <summary>
+            DbContext da aplicação (MySQL).
+            </summary>
+        </member>
+        <member name="T:BurgerApi.Domain.Burger">
+            <summary>
+            Burger base com preço base e relação de coberturas (toppings).
+            </summary>
+        </member>
+        <member name="T:BurgerApi.Domain.BurgerTopping">
+            <summary>
+            Tabela de junção Burger x Topping (N:N).
+            </summary>
+        </member>
+        <member name="T:BurgerApi.Domain.Topping">
+            <summary>
+            Topping (cobertura/ingrediente) com preço avulso.
+            </summary>
+        </member>
+        <member name="T:BurgerApi.DTOs.CreateBurgerDto">
+            <summary>
+            DTO para criação de Burger.
+            </summary>
+        </member>
+        <member name="P:BurgerApi.DTOs.CreateBurgerDto.ToppingIds">
+            <summary>Opcional: toppings iniciais.</summary>
+        </member>
+        <member name="T:BurgerApi.DTOs.UpdateBurgerDto">
+            <summary>
+            DTO para atualização de Burger.
+            </summary>
+        </member>
+        <member name="T:BurgerApi.DTOs.BurgerDto">
+            <summary>
+            DTO de leitura (inclui preço calculado e lista de toppings).
+            </summary>
+        </member>
+        <member name="T:BurgerApi.Mappings.MappingProfile">
+            <summary>
+            Perfil do AutoMapper para mapear Entidades ? DTOs.
+            </summary>
+        </member>
+        <member name="T:BurgerApi.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:BurgerApi.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BurgerApi.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:BurgerApi.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:BurgerApi.Services.Implementations.BurgerService">
+            <summary>
+            Service de Burger com operações CRUD e gerenciamento de Toppings.
+            </summary>
+        </member>
+        <member name="T:BurgerApi.Services.Implementations.ToppingService">
+            <summary>
+            Service de Topping com CRUD básico.
+            </summary>
+        </member>
+        <member name="T:BurgerApi.Utils.PriceExtensions">
+            <summary>
+            Extensões para cálculo de preços.
+            </summary>
+        </member>
+        <member name="M:BurgerApi.Utils.PriceExtensions.CalculatePrice(BurgerApi.Domain.Burger)">
+            <summary>
+            Preço total = BasePrice + soma dos Toppings.
+            </summary>
+        </member>
+    </members>
+</doc>

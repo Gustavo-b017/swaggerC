@@ -1,0 +1,11 @@
+@BurgerApi_HostAddress = http://localhost:5111
+
+GET {{BurgerApi_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{BurgerApi_HostAddress}}/todos/1
+Accept: application/json
+
+###
