@@ -24,7 +24,7 @@ builder.Services.AddScoped<IToppingService, ToppingService>();
 
 // Controllers + Swagger
 builder.Services.AddControllers()
-    .AddJsonOptions(o => { /* mantém padrão; ideal pro front depois */ });
+    .AddJsonOptions(o => { /* mantï¿½m padrï¿½o; ideal pro front depois */ });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -35,7 +35,7 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "Burger API",
         Version = "v1",
-        Description = "API didática para montar hambúrguer, com foco em documentação Swagger (CRUD + N:N)."
+        Description = "API didï¿½tica para montar hambï¿½rguer, com foco em documentaï¿½ï¿½o Swagger (CRUD + N:N)."
     });
 
     // XML comments
@@ -54,6 +54,7 @@ builder.Services.AddCors(opt =>
             "http://localhost:5173",
             "http://127.0.0.1:5173",
             "http://127.0.0.1:5500",
+            "https://hamburgueria-ten-kappa.vercel.app/",
             "http://localhost:3000"
         )
          .AllowAnyHeader()
@@ -62,7 +63,7 @@ builder.Services.AddCors(opt =>
 
 var app = builder.Build();
 
-// Swagger sempre ligado neste projeto didático
+// Swagger sempre ligado neste projeto didï¿½tico
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -75,7 +76,7 @@ app.UseHttpsRedirection();
 app.UseCors(CorsPolicy);
 app.MapControllers();
 
-// Aplica migrações no start (conveniente pra dev)
+// Aplica migraï¿½ï¿½es no start (conveniente pra dev)
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
