@@ -8,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Serviços essenciais
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(o => o.UseInMemoryDatabase("BurgerDb"));
+
+// CORS simples (permite qualquer origem, header e método)
+builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
+    p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o =>
 {
@@ -21,16 +27,21 @@ builder.Services.AddSwaggerGen(o =>
 
 var app = builder.Build();
 
-// Swagger sempre habilitado (para estudo)
+// Swagger para estudo
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseHttpsRedirection();
+
+// IMPORTANTe: CORS antes dos controllers
+app.UseCors();
+
 app.MapControllers();
 
+// Seed didático
 Seed(app);
 app.Run();
 
-// ---- Seed simples de dados (para demonstração) ----
 static void Seed(WebApplication app)
 {
     using var scope = app.Services.CreateScope();
@@ -39,9 +50,9 @@ static void Seed(WebApplication app)
 
     db.Adicionais.AddRange(
         new Adicional { Nome = "Queijo Cheddar", Preco = 3.50m, Ativo = true },
-        new Adicional { Nome = "Bacon", Preco = 4.00m, Ativo = true },
-        new Adicional { Nome = "Cebola Crispy", Preco = 2.50m, Ativo = true },
-        new Adicional { Nome = "Picles", Preco = 1.50m, Ativo = false }
+        new Adicional { Nome = "Bacon",          Preco = 4.00m, Ativo = true },
+        new Adicional { Nome = "Cebola Crispy",  Preco = 2.50m, Ativo = true },
+        new Adicional { Nome = "Picles",         Preco = 1.50m, Ativo = false }
     );
     db.SaveChanges();
 }
