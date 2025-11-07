@@ -13,45 +13,49 @@ var builder = WebApplication.CreateBuilder(args);
 // Se nada disso vier, cai no appsettings.json (dev/local).
 string? BuildRailwayMySqlConnectionString()
 {
-    // 1) MYSQL_URL ou MYSQL_PUBLIC_URL => mysql://user:pass@host:port/db
-    var url = Environment.GetEnvironmentVariable("MYSQL_URL")
-              ?? Environment.GetEnvironmentVariable("MYSQL_PUBLIC_URL");
-    if (!string.IsNullOrWhiteSpace(url))
+    // 1) Tenta URL completa (MYSQL_URL ou MYSQL_PUBLIC_URL)
+    var rawUrl = Environment.GetEnvironmentVariable("MYSQL_URL")
+                 ?? Environment.GetEnvironmentVariable("MYSQL_PUBLIC_URL");
+    if (!string.IsNullOrWhiteSpace(rawUrl))
     {
         try
         {
-            var uri = new Uri(url);
-            var userInfo = uri.UserInfo.Split(':', 2);
-            var user = userInfo.Length > 0 ? userInfo[0] : "";
-            var pass = userInfo.Length > 1 ? userInfo[1] : "";
-            var host = uri.Host;
-            var port = uri.Port > 0 ? uri.Port.ToString() : "3306";
-            var db   = uri.AbsolutePath.TrimStart('/');
-            if (!string.IsNullOrWhiteSpace(host) && !string.IsNullOrWhiteSpace(db))
-                return $"Server={host};Port={port};Database={db};User Id={user};Password={pass};CharSet=utf8mb4;TreatTinyAsBoolean=true;";
+            var uri = new Uri(rawUrl);
+            var ui  = uri.UserInfo.Split(':', 2);
+            var urlUser = ui.Length > 0 ? ui[0] : "";
+            var urlPass = ui.Length > 1 ? ui[1] : "";
+            var urlHost = uri.Host;
+            var urlPort = uri.Port > 0 ? uri.Port.ToString() : "3306";
+            var urlDb   = uri.AbsolutePath.TrimStart('/');
+
+            if (!string.IsNullOrWhiteSpace(urlHost) && !string.IsNullOrWhiteSpace(urlDb))
+                return $"Server={urlHost};Port={urlPort};Database={urlDb};User Id={urlUser};Password={urlPass};CharSet=utf8mb4;TreatTinyAsBoolean=true;";
         }
-        catch { /* se não parsear, tenta o plano B */ }
+        catch
+        {
+            // se não parsear, cai pro plano B
+        }
     }
 
-    // 2) Campos separados (nomes que o Railway costuma expor)
-    string? First(params string?[] cands) => cands.FirstOrDefault(s => !string.IsNullOrWhiteSpace(s));
+    // 2) Campos separados
+    string? First(params string?[] xs) => xs.FirstOrDefault(s => !string.IsNullOrWhiteSpace(s));
 
-    var host = First(Environment.GetEnvironmentVariable("MYSQLHOST"),
-                     Environment.GetEnvironmentVariable("MYSQL_HOST"));
-    var port = First(Environment.GetEnvironmentVariable("MYSQLPORT"),
-                     Environment.GetEnvironmentVariable("MYSQL_PORT")) ?? "3306";
-    var db   = First(Environment.GetEnvironmentVariable("MYSQL_DATABASE"),
-                     Environment.GetEnvironmentVariable("MYSQLDATABASE"));
-    var user = First(Environment.GetEnvironmentVariable("MYSQLUSER"),
-                     Environment.GetEnvironmentVariable("MYSQL_USER"));
-    var pass = First(Environment.GetEnvironmentVariable("MYSQLPASSWORD"),
-                     Environment.GetEnvironmentVariable("MYSQL_PASSWORD"));
+    var envHost = First(Environment.GetEnvironmentVariable("MYSQLHOST"),
+                        Environment.GetEnvironmentVariable("MYSQL_HOST"));
+    var envPort = First(Environment.GetEnvironmentVariable("MYSQLPORT"),
+                        Environment.GetEnvironmentVariable("MYSQL_PORT")) ?? "3306";
+    var envDb   = First(Environment.GetEnvironmentVariable("MYSQL_DATABASE"),
+                        Environment.GetEnvironmentVariable("MYSQLDATABASE"));
+    var envUser = First(Environment.GetEnvironmentVariable("MYSQLUSER"),
+                        Environment.GetEnvironmentVariable("MYSQL_USER"));
+    var envPass = First(Environment.GetEnvironmentVariable("MYSQLPASSWORD"),
+                        Environment.GetEnvironmentVariable("MYSQL_PASSWORD"));
 
-    if (!string.IsNullOrWhiteSpace(host) &&
-        !string.IsNullOrWhiteSpace(db) &&
-        !string.IsNullOrWhiteSpace(user))
+    if (!string.IsNullOrWhiteSpace(envHost) &&
+        !string.IsNullOrWhiteSpace(envDb) &&
+        !string.IsNullOrWhiteSpace(envUser))
     {
-        return $"Server={host};Port={port};Database={db};User Id={user};Password={pass};CharSet=utf8mb4;TreatTinyAsBoolean=true;";
+        return $"Server={envHost};Port={envPort};Database={envDb};User Id={envUser};Password={envPass};CharSet=utf8mb4;TreatTinyAsBoolean=true;";
     }
 
     // 3) Fallback dev/local
