@@ -26,8 +26,8 @@
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\Program.cs*",
-              "RelativeToolTip": "Program.cs*",
+              "ToolTip": "C:\\Users\\Gustavo\\Documents\\Repositorios\\Gustavo-b017\\swaggerC\\BurgerApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAAAwC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-07T19:26:10.972Z",
@@ -43,8 +43,7 @@
               "RelativeToolTip": "BurgerApi.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-06T22:21:47.955Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-06T22:21:47.955Z"
             }
           ]
         }

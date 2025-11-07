@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace BurgerApiPT.Models
 {
     /// <summary>
-    /// Representa um item adicional do hambúrguer (antes chamado de 'Topping').
+    /// Representa um item adicional do hambúrguer.
     /// </summary>
     public class Adicional
     {

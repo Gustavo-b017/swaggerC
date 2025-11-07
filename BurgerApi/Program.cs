@@ -27,7 +27,7 @@ builder.Services.AddSwaggerGen(o =>
 
 var app = builder.Build();
 
-// Swagger para estudo
+// Swagger 
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -38,7 +38,6 @@ app.UseCors();
 
 app.MapControllers();
 
-// Seed didático
 Seed(app);
 app.Run();
 

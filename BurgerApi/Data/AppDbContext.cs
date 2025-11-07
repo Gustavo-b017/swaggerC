@@ -11,7 +11,7 @@ namespace BurgerApiPT.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         /// <summary>
-        /// Coleção de Adicionais (equivalente ao antigo 'Topping').
+        /// Coleção de Adicionais.
         /// </summary>
         public DbSet<Adicional> Adicionais => Set<Adicional>();
     }

@@ -32,12 +32,12 @@
         </member>
         <member name="P:BurgerApiPT.Data.AppDbContext.Adicionais">
             <summary>
-            Coleção de Adicionais (equivalente ao antigo 'Topping').
+            Coleção de Adicionais.
             </summary>
         </member>
         <member name="T:BurgerApiPT.Models.Adicional">
             <summary>
-            Representa um item adicional do hambúrguer (antes chamado de 'Topping').
+            Representa um item adicional do hambúrguer.
             </summary>
         </member>
         <member name="P:BurgerApiPT.Models.Adicional.Id">
