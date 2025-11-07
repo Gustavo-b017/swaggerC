@@ -12,7 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 var conn = builder.Configuration.GetConnectionString("BurgerDb");
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    opt.UseMySql(conn, ServerVersion.AutoDetect(conn));
+    // opt.UseMySql(conn, ServerVersion.AutoDetect(conn));
+    var serverVersion = new MySqlServerVersion(new Version(8, 0, 36)); // ajuste se seu MySQL for 5.7/8.0.x
+    opt.UseMySql(conn, serverVersion);
 });
 
 // AutoMapper
@@ -63,7 +65,7 @@ builder.Services.AddCors(opt =>
 
 var app = builder.Build();
 
-// Swagger sempre ligado neste projeto did�tico
+// Swagger sempre ligado
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -72,15 +74,32 @@ app.UseSwaggerUI(c =>
     c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
 });
 
-app.UseHttpsRedirection();
+// Em container (Railway) expondo HTTP, não force redirect
+if (app.Environment.IsDevelopment())
+    app.UseHttpsRedirection();
+
 app.UseCors(CorsPolicy);
 app.MapControllers();
 
-// Aplica migra��es no start (conveniente pra dev)
+// Migrações com pequeno retry (não precisa Polly aqui)
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
+    var tentativas = 0;
+    while (true)
+    {
+        try
+        {
+            db.Database.Migrate();
+            break;
+        }
+        catch (Exception ex) when (tentativas < 10)
+        {
+            tentativas++;
+            Console.WriteLine($"[Migrate] Tentativa {tentativas} falhou: {ex.Message}. Aguardando 2s...");
+            await Task.Delay(2000);
+        }
+    }
 }
 
 app.Run();
