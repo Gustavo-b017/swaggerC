@@ -56,7 +56,7 @@ builder.Services.AddCors(opt =>
             "http://localhost:5173",
             "http://127.0.0.1:5173",
             "http://127.0.0.1:5500",
-            "https://hamburgueria-ten-kappa.vercel.app/",
+            "https://hamburgueria-ten-kappa.vercel.app",
             "http://localhost:3000"
         )
          .AllowAnyHeader()
